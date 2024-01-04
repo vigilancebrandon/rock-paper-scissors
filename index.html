@@ -6,6 +6,18 @@ Computer makes selection upon input
   Determine winner
 Print selections
 Print winner
+
+Rock, Rock
+Rock, Paper
+Rock, Scissors
+
+Paper, Paper
+Paper, Rock
+Paper, Scissors
+
+Scissors, Scissors
+Scissors, Rock
+Scissors, Paper
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,14 +28,54 @@ Print winner
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
         if (computer === 0) {
-          computer = "Rock"
+          computer = "Rock";
         } else if (computer === 1) {
-          computer = "Paper"
+          computer = "Paper";
         } else if (computer === 2) {
-          computer = "Scissors"
+          computer = "Scissors";
         }
-        console.log(computer)
+        //console.log(computer);
+        return computer;
       }
+
+      function getPlayerChoice() {
+        let player = prompt("Please select Rock, Paper, or Scissors: ");
+        player = player[0].toUpperCase() + player.slice(1).toLowerCase();
+        //in case user input is invalid
+        while (player !== "Rock" || player !== "Paper" || player !== "Scissors") {
+          player = prompt("Oops! Please select Rock, Paper, or Scissors: ");
+          player = player[0].toUpperCase() + player.slice(1).toLowerCase();
+        }
+        //console.log(player);
+        return player;
+      }
+
+      function declareWinner(computer, player) {
+        let winner = "";
+        //check for tie
+        if (computer === player) {
+          return `It's a tie! You both played ${computer}`;
+        } else if (
+          (computer === "Rock" && player === "Scissors") 
+          || (computer === "Paper" && player === "Rock")
+          || (computer === "Scissors" && player === "Paper")
+          ) {
+            return `You lose! ${computer} beats ${player}`;
+          } else if (
+            (player === "Rock" && computer === "Scissors") 
+          || (player === "Paper" && computer === "Rock")
+          || (player === "Scissors" && computer === "Paper")
+          ) {
+            return `You win! ${player} beats ${computer}`;
+          }
+        }
+
+        function playAgain() {
+          if (prompt("Would you like to play again?"))
+        }
+
+        console.log(declareWinner(getPlayerChoice(), getComputerChoice()));
+        
     </script>
   </body>
 </html>
