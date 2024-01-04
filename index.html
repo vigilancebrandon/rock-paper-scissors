@@ -74,7 +74,7 @@ Scissors, Paper
           player = getPlayerChoice();
           //check for tie
           if (computer === player) {
-            console.log(`It's a tie! You both played ${computer}`);
+            console.log(`It's a tie! You both played ${computer}.\nLet's try again!`);
             playGame();
           } else {
             console.log(declareWinner(computer,player));
