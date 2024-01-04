@@ -52,10 +52,7 @@ Scissors, Paper
 
       function declareWinner(computer, player) {
         let winner = "";
-        //check for tie
-        if (computer === player) {
-          return `It's a tie! You both played ${computer}`;
-        } else if (
+        if (
           (computer === "Rock" && player === "Scissors") 
           || (computer === "Paper" && player === "Rock")
           || (computer === "Scissors" && player === "Paper")
@@ -70,12 +67,21 @@ Scissors, Paper
           }
         }
 
-        function playAgain() {
-          if (prompt("Would you like to play again?"))
+        function playGame() {
+          computer = getComputerChoice();
+          player = getPlayerChoice();
+          //check for tie
+          if (computer === player) {
+            console.log(`It's a tie! You both played ${computer}`);
+            playGame();
+          } else {
+            console.log(declareWinner(computer,player);
+          }
         }
 
-        console.log(declareWinner(getPlayerChoice(), getComputerChoice()));
-        
+        function playAgain() {
+          if (prompt("Would you like to play again?") === "Yes")
+        }        
     </script>
   </body>
 </html>
