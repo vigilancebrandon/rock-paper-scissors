@@ -52,43 +52,47 @@ Scissors, Paper
         return player;
       }
 
-      function declareWinner(computer, player) {
+      function determineWinner(computer, player) {
         let winner = "";
         if (
           (computer === "Rock" && player === "Scissors") 
           || (computer === "Paper" && player === "Rock")
           || (computer === "Scissors" && player === "Paper")
           ) {
-            return `You lose! ${computer} beats ${player}`;
+            return computer;
           } else if (
             (player === "Rock" && computer === "Scissors") 
           || (player === "Paper" && computer === "Rock")
           || (player === "Scissors" && computer === "Paper")
           ) {
-            return `You win! ${player} beats ${computer}`;
+            return player;
           }
         }
 
-        function playGame() {
+        function playRound() {
           computer = getComputerChoice();
           player = getPlayerChoice();
           //check for tie
           if (computer === player) {
             console.log(`It's a tie! You both played ${computer}.\nLet's try again!`);
-            playGame();
+            playRound();
           } else {
-            console.log(declareWinner(computer,player));
+            console.log(determineWinner(computer,player));
           }
-          playAgain()
+          //playAgain()
         }
 
-        function playAgain() {
+        /*function playAgain() {
           if (confirm("Would you like to play again?")) {
-            playGame()
+            playRound()
           } else {
             console.log("Ok. Thanks for playing!")
           }
-        }        
+        }*/
+        
+        function game() {
+          playRound()
+        }
     </script>
   </body>
 </html>
