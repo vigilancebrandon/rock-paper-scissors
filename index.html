@@ -59,14 +59,14 @@ Scissors, Paper
           || (computer === "Paper" && player === "Rock")
           || (computer === "Scissors" && player === "Paper")
           ) {
-            console.log(`You lose!${computer} beats ${player}`)
+            console.log(`You lose the round! ${computer} beats ${player}`)
             return "computer";
           } else if (
             (player === "Rock" && computer === "Scissors") 
           || (player === "Paper" && computer === "Rock")
           || (player === "Scissors" && computer === "Paper")
           ) {
-            console.log(`You win! ${player} beats ${computer}`)
+            console.log(`You win the round! ${player} beats ${computer}`)
             return "player";
           }
         }
@@ -95,9 +95,19 @@ Scissors, Paper
         function game() {
           let compWins = 0;
           let playerWins = 0;
-          let result = playRound();
-          if result === 'computer' {
-            compWins++;
+          while (compWins + playerWins < 5) {
+            if (playRound() === 'computer') {
+              compWins++;
+            } else {
+              playerWins++;
+            }
+            if (compWins === 3) {
+              console.log(`You lose the game, ${compWins} to ${playerWins}!`);
+              break
+            } else if (playerWins === 3) {
+              console.log(`You win the game, ${playerWins} to ${compWins}!`);
+              break
+            }
           }
         }
     </script>
