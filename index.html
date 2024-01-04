@@ -1,0 +1,29 @@
+<!--
+Make a game that plays rock paper scissors against the computer in console.
+Player inputs "Rock", "Paper", or "Scissors"
+Computer makes selection upon input
+  Pass selections to winner function
+  Determine winner
+Print selections
+Print winner
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <body>
+    <script>
+      function getComputerChoice() {
+        let computer = Math.floor(Math.random() * 3)
+        if (computer === 0) {
+          computer = "Rock"
+        } else if (computer === 1) {
+          computer = "Paper"
+        } else if (computer === 2) {
+          computer = "Scissors"
+        }
+        console.log(computer)
+      }
+    </script>
+  </body>
+</html>
