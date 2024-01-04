@@ -79,11 +79,14 @@ Scissors, Paper
           } else {
             console.log(declareWinner(computer,player));
           }
+          playAgain()
         }
 
         function playAgain() {
-          if (prompt("Would you like to play again?") === "Yes") {
-            //keep working here
+          if (confirm("Would you like to play again?")) {
+            playGame()
+          } else {
+            console.log("Ok. Thanks for playing!")
           }
         }        
     </script>
