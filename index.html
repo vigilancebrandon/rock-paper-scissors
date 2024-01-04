@@ -34,26 +34,22 @@ Scissors, Paper
         } else if (computer === 2) {
           computer = "Scissors";
         }
-        //console.log(computer);
         return computer;
       }
 
       function getPlayerChoice() {
         let player = prompt("Please select Rock, Paper, or Scissors: ");
-        player = player[0].toUpperCase() + player.slice(1).toLowerCase();
-        //console.log(player);
+        player = player[0].toUpperCase() + player.slice(1).toLowerCase();//Sets capitalization format
         let validItems = ["Rock", "Paper", "Scissors"];
         //in case user input is invalid
         while (!validItems.includes(player)) {
           player = prompt("Oops! Please select Rock, Paper, or Scissors: ");
           player = player[0].toUpperCase() + player.slice(1).toLowerCase();
         }
-        //console.log(player);
         return player;
       }
 
       function determineWinner(computer, player) {
-        let winner = "";
         if (
           (computer === "Rock" && player === "Scissors") 
           || (computer === "Paper" && player === "Rock")
@@ -61,15 +57,15 @@ Scissors, Paper
           ) {
             console.log(`You lose the round! ${computer} beats ${player}`)
             return "computer";
-          } else if (
+        } else if (
             (player === "Rock" && computer === "Scissors") 
           || (player === "Paper" && computer === "Rock")
           || (player === "Scissors" && computer === "Paper")
           ) {
             console.log(`You win the round! ${player} beats ${computer}`)
             return "player";
-          }
         }
+      }
 
         function playRound() {
           computer = getComputerChoice();
@@ -95,7 +91,7 @@ Scissors, Paper
         function game() {
           let compWins = 0;
           let playerWins = 0;
-          while (compWins + playerWins < 5) {
+          while (compWins + playerWins < 5) { //to change number of rounds, simply change the number in boolean for while loop, as well as majority win values for win conditions
             if (playRound() === 'computer') {
               compWins++;
             } else {
