@@ -41,8 +41,10 @@ Scissors, Paper
       function getPlayerChoice() {
         let player = prompt("Please select Rock, Paper, or Scissors: ");
         player = player[0].toUpperCase() + player.slice(1).toLowerCase();
+        console.log(player)
+        let validItems = ["Rock", "Paper", "Scissors"]
         //in case user input is invalid
-        while (player !== "Rock" || player !== "Paper" || player !== "Scissors") {
+        while (!validItems.includes(player)) {
           player = prompt("Oops! Please select Rock, Paper, or Scissors: ");
           player = player[0].toUpperCase() + player.slice(1).toLowerCase();
         }
@@ -81,7 +83,7 @@ Scissors, Paper
 
         function playAgain() {
           if (prompt("Would you like to play again?") === "Yes") {
-            
+            //keep working here
           }
         }        
     </script>
