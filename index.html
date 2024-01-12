@@ -30,14 +30,27 @@ Scissors, Paper
     <div>
       <p id="round-results"></p>
       <div id="game-results">
-        <p id="computer-wins">Computer wins:</p>
-        <p id="player-wins">Player wins:</p>
+        <p id="computer-wins"></p>
+        <p id="player-wins"></p>
         <p id="ties"></p>
+        <p id="#final-result"></p>
       </div>
     </div>
     <script>
       let roundResults = document.querySelector('#round-results');
-      let gameResults = document.querySelector('#game-results');
+      //let gameResults = document.querySelector('#game-results'); //could be useful to have this div for later styling
+      let computerWinsDisplay = document.querySelector('#computer-wins');
+      let playerWinsDisplay = document.querySelector('#player-wins');
+      let tiesDisplay = document.querySelector('#ties');
+      let finalResult = document.querySelector('#final-result');
+
+      let computerWins = 0;
+      let playerWins = 0;
+      let ties = 0;
+      
+      computerWinsDisplay.textContent = "Computer: 0";
+      playerWinsDisplay.textContent = "Player: 0";
+      tiesDisplay.textContent = "Ties: 0";
 
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
@@ -51,35 +64,69 @@ Scissors, Paper
         return computer;
       }
 
+      function playRound(player) {
+          computer = getComputerChoice();
+          if (computer === player) {
+            roundResults.textContent = `It's a tie! You both played ${computer}.\nLet's try again!`;
+            ties++;
+            tiesDisplay.textContent = `Ties: ${ties}`;
+            playRound();
+          } else {
+            determineWinner(computer, player);
+          };
+          if (computerWins === 5) {
+            finalResult.textContent = `Computer wins the game, ${computerWins} to ${playerWins}!`;
+            reset();
+          } else if (playerWins === 5) {
+            finalResult.textContent = `Player wins the game, ${playerWins} to ${computerWins}!`;
+            reset();
+          };
+        }
+
       function determineWinner(computer, player) {
         if (
           (computer === "rock" && player === "scissors") 
           || (computer === "paper" && player === "rock")
           || (computer === "scissors" && player === "paper")
           ) {
-            roundResults.textContent = `You lose the round! ${computer} beats ${player}`;
             return "computer";
         } else if (
           (player === "rock" && computer === "scissors")
           || (player === "paper" && computer === "rock")
           || (player === "scissors" && computer === "paper")
           ) {
-            roundResults.textContent = `You win the round! ${player} beats ${computer}`;
             return "player";
         }
       }
 
-        function playRound(player) {
-          computer = getComputerChoice();
-          //player = getPlayerChoice();
-          //check for tie
-          if (computer === player) {
-            roundResults.textContent = `It's a tie! You both played ${computer}.\nLet's try again!`;
-            playRound();
-          } else {
-            return determineWinner(computer, player);
-          }
+      function updateScore(winner) {
+        if (winner === 'computer') {
+          computerWins++;
+        } else if (winner === 'player') {
+          playerWins++;
         }
+      }
+
+      function updateResults(winner) {
+        if (winner === 'computer') {
+          roundResults.textContent = `You lose the round! ${computer} beats ${player}`;
+          computerWinsDisplay.textContent = `Computer: ${computerWins}`;
+        } else if (winner === 'player') {
+          roundResults.textContent = `You win the round! ${player} beats ${computer}`;
+          playerWinsDisplay.textContent = `Player: ${playerWins}`;
+        }
+      }
+
+
+      function reset() {
+        computerWins = 0;
+        playerWins = 0;
+        ties = 0;
+        computerWinsDisplay.textContent = "Computer: 0";
+        playerWinsDisplay.textContent = "Player: 0";
+        tiesDisplay.textContent = "Ties: 0";
+      }
+
 
         let rockButton = document.querySelector('#rock');
         let paperButton = document.querySelector('#paper');
