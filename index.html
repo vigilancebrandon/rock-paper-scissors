@@ -27,7 +27,18 @@ Scissors, Paper
     <button id="rock">Rock</button>
     <button id="paper">Paper</button>
     <button id="scissors">Scissors</button>
+    <div>
+      <p id="round-results"></p>
+      <div id="game-results">
+        <p id="computer-wins">Computer wins:</p>
+        <p id="player-wins">Player wins:</p>
+        <p id="ties"></p>
+      </div>
+    </div>
     <script>
+      let roundResults = document.querySelector('#round-results');
+      let gameResults = document.querySelector('#game-results');
+
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
         if (computer === 0) {
@@ -40,31 +51,20 @@ Scissors, Paper
         return computer;
       }
 
-      /*function getPlayerChoice() {
-        let player = prompt("Please select rock, paper, or scissors: ");
-        player = player.toLowerCase();
-        let validItems = ["rock", "paper", "scissors"];
-        while (!validItems.includes(player)) {
-          player = prompt("Oops! Please select rock, paper, or scissors: ");
-          player = player.toLowerCase();
-        }
-        return player;
-      }*/
-
       function determineWinner(computer, player) {
         if (
           (computer === "rock" && player === "scissors") 
           || (computer === "paper" && player === "rock")
           || (computer === "scissors" && player === "paper")
           ) {
-            console.log(`You lose the round! ${computer} beats ${player}`)
+            roundResults.textContent = `You lose the round! ${computer} beats ${player}`;
             return "computer";
         } else if (
           (player === "rock" && computer === "scissors")
           || (player === "paper" && computer === "rock")
           || (player === "scissors" && computer === "paper")
           ) {
-            console.log(`You win the round! ${player} beats ${computer}`)
+            roundResults.textContent = `You win the round! ${player} beats ${computer}`;
             return "player";
         }
       }
@@ -74,7 +74,7 @@ Scissors, Paper
           //player = getPlayerChoice();
           //check for tie
           if (computer === player) {
-            console.log(`It's a tie! You both played ${computer}.\nLet's try again!`);
+            roundResults.textContent = `It's a tie! You both played ${computer}.\nLet's try again!`;
             playRound();
           } else {
             return determineWinner(computer, player);
