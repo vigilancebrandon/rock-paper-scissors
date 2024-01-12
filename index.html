@@ -61,17 +61,19 @@ Scissors, Paper
         if (finalResult) {
           finalResult.textContent = ''
         };
-        playRound(event.target.id);
+        player = event.target.id;
+        player = player[0].toUpperCase() + player.slice(1).toLowerCase();
+        playRound(player);
       });
 
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
         if (computer === 0) {
-          computer = "rock";
+          computer = "Rock";
         } else if (computer === 1) {
-          computer = "paper";
+          computer = "Paper";
         } else if (computer === 2) {
-          computer = "scissors";
+          computer = "Scissors";
         }
         return computer;
       }
@@ -85,17 +87,17 @@ Scissors, Paper
 
       function determineWinner(computer, player) {
         if (computer === player) {
-          return 'tie';
+          return 'Tie';
         } else if (
-          (computer === "rock" && player === "scissors") 
-          || (computer === "paper" && player === "rock")
-          || (computer === "scissors" && player === "paper")
+          (computer === "Rock" && player === "Scissors") 
+          || (computer === "Paper" && player === "Rock")
+          || (computer === "Scissors" && player === "Paper")
           ) {
             return "computer";
         } else if (
-          (player === "rock" && computer === "scissors")
-          || (player === "paper" && computer === "rock")
-          || (player === "scissors" && computer === "paper")
+          (player === "Rock" && computer === "Scissors")
+          || (player === "Paper" && computer === "Rock")
+          || (player === "Scissors" && computer === "Paper")
           ) {
             return "player";
         }
@@ -106,7 +108,7 @@ Scissors, Paper
           computerWins++;
         } else if (winner === 'player') {
           playerWins++;
-        } else if (winner === 'tie') {
+        } else if (winner === 'Tie') {
           ties++;
         }
       }
