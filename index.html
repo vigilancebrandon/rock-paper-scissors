@@ -86,19 +86,10 @@ Scissors, Paper
         let scissorsButton = document.querySelector('#scissors');
 
         //replace this with event delegation?
-        rockButton.addEventListener('click', (event) => {
-          playRound(event.target.id);
-        });
-        paperButton.addEventListener('click', (event) => {
-          playRound(event.target.id);
-        });
-        scissorsButton.addEventListener('click', (event)=> {
+        window.addEventListener('click', (event) => {
           playRound(event.target.id);
         });
 
-        
-        
-        
         /*function game() {
           let compWins = 0;
           let playerWins = 0;
