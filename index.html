@@ -24,6 +24,7 @@ Scissors, Paper
   <meta charset="UTF-8">
   <title>Rock Paper Scissors</title>
   <body>
+    <h1>Type "game()" into the browser console and press Return</h1>
     <script>
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
@@ -41,7 +42,6 @@ Scissors, Paper
         let player = prompt("Please select Rock, Paper, or Scissors: ");
         player = player[0].toUpperCase() + player.slice(1).toLowerCase();//Sets capitalization format
         let validItems = ["Rock", "Paper", "Scissors"];
-        //in case user input is invalid
         while (!validItems.includes(player)) {
           player = prompt("Oops! Please select Rock, Paper, or Scissors: ");
           player = player[0].toUpperCase() + player.slice(1).toLowerCase();
@@ -51,16 +51,16 @@ Scissors, Paper
 
       function determineWinner(computer, player) {
         if (
-          (computer === "Rock" && player === "Scissors") 
-          || (computer === "Paper" && player === "Rock")
-          || (computer === "Scissors" && player === "Paper")
+          (computer === "Rock" && player === "Scissors") || 
+          (computer === "Paper" && player === "Rock") ||
+          (computer === "Scissors" && player === "Paper")
           ) {
             console.log(`You lose the round! ${computer} beats ${player}`)
             return "computer";
         } else if (
-            (player === "Rock" && computer === "Scissors") 
-          || (player === "Paper" && computer === "Rock")
-          || (player === "Scissors" && computer === "Paper")
+          (player === "Rock" && computer === "Scissors") ||
+          (player === "Paper" && computer === "Rock") ||
+          (player === "Scissors" && computer === "Paper")
           ) {
             console.log(`You win the round! ${player} beats ${computer}`)
             return "player";
@@ -77,16 +77,7 @@ Scissors, Paper
           } else {
             return determineWinner(computer, player);
           }
-          //playAgain()
         }
-
-        /*function playAgain() {
-          if (confirm("Would you like to play again?")) {
-            playRound()
-          } else {
-            console.log("Ok. Thanks for playing!")
-          }
-        }*/
         
         function game() {
           let compWins = 0;
@@ -107,6 +98,5 @@ Scissors, Paper
           }
         }
     </script>
-    <h1>Type "game()" into the browser console and press Return</h1>
   </body>
 </html>
