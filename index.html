@@ -39,18 +39,27 @@ Scissors, Paper
     <script>
       let roundResults = document.querySelector('#round-results');
       //let gameResults = document.querySelector('#game-results'); //could be useful to have this div for later styling
-      let computerWinsDisplay = document.querySelector('#computer-wins');
-      let playerWinsDisplay = document.querySelector('#player-wins');
-      let tiesDisplay = document.querySelector('#ties');
+      let computerWinsResults = document.querySelector('#computer-wins');
+      let playerWinsResults = document.querySelector('#player-wins');
+      let tiesResults = document.querySelector('#ties');
       let finalResult = document.querySelector('#final-result');
 
       let computerWins = 0;
       let playerWins = 0;
       let ties = 0;
       
-      computerWinsDisplay.textContent = "Computer: 0";
-      playerWinsDisplay.textContent = "Player: 0";
-      tiesDisplay.textContent = "Ties: 0";
+      computerWinsResults.textContent = "Computer: 0";
+      playerWinsResults.textContent = "Player: 0";
+      tiesResults.textContent = "Ties: 0";
+
+      let rockButton = document.querySelector('#rock');
+      let paperButton = document.querySelector('#paper');
+      let scissorsButton = document.querySelector('#scissors');
+
+      //replace this with event delegation?
+      window.addEventListener('click', (event) => {
+        playRound(event.target.id);
+      });
 
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
@@ -66,25 +75,15 @@ Scissors, Paper
 
       function playRound(player) {
           computer = getComputerChoice();
-          if (computer === player) {
-            roundResults.textContent = `It's a tie! You both played ${computer}.\nLet's try again!`;
-            ties++;
-            tiesDisplay.textContent = `Ties: ${ties}`;
-            playRound();
-          } else {
-            determineWinner(computer, player);
-          };
-          if (computerWins === 5) {
-            finalResult.textContent = `Computer wins the game, ${computerWins} to ${playerWins}!`;
-            reset();
-          } else if (playerWins === 5) {
-            finalResult.textContent = `Player wins the game, ${playerWins} to ${computerWins}!`;
-            reset();
-          };
+          winner = determineWinner(computer, player)
+          updateScore(winner);
+          updateResults(winner, computer, player);
         }
 
       function determineWinner(computer, player) {
-        if (
+        if (computer === player) {
+          return 'tie';
+        } else if (
           (computer === "rock" && player === "scissors") 
           || (computer === "paper" && player === "rock")
           || (computer === "scissors" && player === "paper")
@@ -104,38 +103,39 @@ Scissors, Paper
           computerWins++;
         } else if (winner === 'player') {
           playerWins++;
+        } else if (winner === 'tie') {
+          ties++;
         }
       }
 
-      function updateResults(winner) {
+      function updateResults(winner, computer, player) {
         if (winner === 'computer') {
           roundResults.textContent = `You lose the round! ${computer} beats ${player}`;
-          computerWinsDisplay.textContent = `Computer: ${computerWins}`;
+          computerWinsResults.textContent = `Computer: ${computerWins}`;
         } else if (winner === 'player') {
           roundResults.textContent = `You win the round! ${player} beats ${computer}`;
-          playerWinsDisplay.textContent = `Player: ${playerWins}`;
+          playerWinsResults.textContent = `Player: ${playerWins}`;
+        } else if (winner === 'tie') {
+          roundResults.textContent = `It's a tie! You both played ${computer}. Let's try again!`;
+          tiesResults.textContent = `Ties: ${ties}`;
+        };
+        if (computerWins === 5) {
+          finalResult.textContent = `Computer wins the game, ${computerWins} to ${playerWins}!`;
+          reset();
+        } else if (playerWins === 5) {
+          finalResult.textContent = `Player wins the game, ${playerWins} to ${computerWins}!`;
+          reset();
         }
       }
-
 
       function reset() {
         computerWins = 0;
         playerWins = 0;
         ties = 0;
-        computerWinsDisplay.textContent = "Computer: 0";
-        playerWinsDisplay.textContent = "Player: 0";
-        tiesDisplay.textContent = "Ties: 0";
+        computerWinsResults.textContent = "Computer: 0";
+        playerWinsResults.textContent = "Player: 0";
+        tiesResults.textContent = "Ties: 0";
       }
-
-
-        let rockButton = document.querySelector('#rock');
-        let paperButton = document.querySelector('#paper');
-        let scissorsButton = document.querySelector('#scissors');
-
-        //replace this with event delegation?
-        window.addEventListener('click', (event) => {
-          playRound(event.target.id);
-        });
 
         /*function game() {
           let compWins = 0;
