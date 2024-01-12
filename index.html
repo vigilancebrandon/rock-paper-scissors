@@ -24,43 +24,45 @@ Scissors, Paper
   <meta charset="UTF-8">
   <title>Rock Paper Scissors</title>
   <body>
-    <h1>Type "game()" into the browser console and press Return</h1>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
     <script>
       function getComputerChoice() {
         let computer = Math.floor(Math.random() * 3)
         if (computer === 0) {
-          computer = "Rock";
+          computer = "rock";
         } else if (computer === 1) {
-          computer = "Paper";
+          computer = "paper";
         } else if (computer === 2) {
-          computer = "Scissors";
+          computer = "scissors";
         }
         return computer;
       }
 
       function getPlayerChoice() {
-        let player = prompt("Please select Rock, Paper, or Scissors: ");
-        player = player[0].toUpperCase() + player.slice(1).toLowerCase();//Sets capitalization format
-        let validItems = ["Rock", "Paper", "Scissors"];
+        let player = prompt("Please select rock, paper, or scissors: ");
+        player = player.toLowerCase();
+        let validItems = ["rock", "paper", "scissors"];
         while (!validItems.includes(player)) {
-          player = prompt("Oops! Please select Rock, Paper, or Scissors: ");
-          player = player[0].toUpperCase() + player.slice(1).toLowerCase();
+          player = prompt("Oops! Please select rock, paper, or scissors: ");
+          player = player.toLowerCase();
         }
         return player;
       }
 
       function determineWinner(computer, player) {
         if (
-          (computer === "Rock" && player === "Scissors") || 
-          (computer === "Paper" && player === "Rock") ||
-          (computer === "Scissors" && player === "Paper")
+          (computer === "rock" && player === "scissors") 
+          || (computer === "paper" && player === "rock")
+          || (computer === "scissors" && player === "paper")
           ) {
             console.log(`You lose the round! ${computer} beats ${player}`)
             return "computer";
         } else if (
-          (player === "Rock" && computer === "Scissors") ||
-          (player === "Paper" && computer === "Rock") ||
-          (player === "Scissors" && computer === "Paper")
+          (player === "rock" && computer === "scissors")
+          || (player === "paper" && computer === "rock")
+          || (player === "scissors" && computer === "paper")
           ) {
             console.log(`You win the round! ${player} beats ${computer}`)
             return "player";
@@ -79,10 +81,10 @@ Scissors, Paper
           }
         }
         
-        function game() {
+        /*function game() {
           let compWins = 0;
           let playerWins = 0;
-          while (compWins + playerWins < 5) { //to change number of rounds, simply change the number in boolean for while loop, as well as majority win values for win conditions
+          /while (compWins + playerWins < 5) {
             if (playRound() === 'computer') {
               compWins++;
             } else {
@@ -96,7 +98,7 @@ Scissors, Paper
               break
             }
           }
-        }
+        }*/
     </script>
   </body>
 </html>
