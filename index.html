@@ -40,7 +40,7 @@ Scissors, Paper
         return computer;
       }
 
-      function getPlayerChoice() {
+      /*function getPlayerChoice() {
         let player = prompt("Please select rock, paper, or scissors: ");
         player = player.toLowerCase();
         let validItems = ["rock", "paper", "scissors"];
@@ -49,7 +49,7 @@ Scissors, Paper
           player = player.toLowerCase();
         }
         return player;
-      }
+      }*/
 
       function determineWinner(computer, player) {
         if (
@@ -69,9 +69,9 @@ Scissors, Paper
         }
       }
 
-        function playRound() {
+        function playRound(player) {
           computer = getComputerChoice();
-          player = getPlayerChoice();
+          //player = getPlayerChoice();
           //check for tie
           if (computer === player) {
             console.log(`It's a tie! You both played ${computer}.\nLet's try again!`);
@@ -80,6 +80,24 @@ Scissors, Paper
             return determineWinner(computer, player);
           }
         }
+
+        let rockButton = document.querySelector('#rock');
+        let paperButton = document.querySelector('#paper');
+        let scissorsButton = document.querySelector('#scissors');
+
+        //replace this with event delegation?
+        rockButton.addEventListener('click', (event) => {
+          playRound(event.target.id);
+        });
+        paperButton.addEventListener('click', (event) => {
+          playRound(event.target.id);
+        });
+        scissorsButton.addEventListener('click', (event)=> {
+          playRound(event.target.id);
+        });
+
+        
+        
         
         /*function game() {
           let compWins = 0;
